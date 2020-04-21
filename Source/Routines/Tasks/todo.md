@@ -18,4 +18,4 @@ data transmitted to cloud
 
 [python quickstart](https://developers.google.com/drive/api/v3/quickstart/python)
 
-<!-- [tutorial using pydrive](https://towardsdatascience.com/how-to-manage-files-in-google-drive-with-python-d26471d91ecd) -->
+[tutorial using pydrive](https://towardsdatascience.com/how-to-manage-files-in-google-drive-with-python-d26471d91ecd)

@@ -21,18 +21,34 @@ User walks in the out the front door, and this causes the routine that catches t
 ### Requirements
 * this must use the minimum amount of CPU time possible, perhaps putting in some kind of `wait` command in the main loop
 * this must be able to run 24/7 without crashing(I've had bad experiences with similar projects in python after a day or so)
-* this must read config files from storage, as more routines will be added by the users
+* this must read config files from storage, as more routines/tasks will be added by the users
 ### Questions
 * Should this pass the Cameras to a given routine/task or should the routines themselves grab the associated cameras
 * 
 # Storage
 ## Configs
 ### Cameras
-*this directory contains Config files for the Cameras, su
-###
+* this directory contains Config files for the Cameras, such as their directory location (i.e. `/dev/video0, /dev/video1`) for webcams or urls for ip cams
+* may contain some kind of designation(living room, front door), if so could replace need for routines as the event handler or the task could grab all cameras with a given designation
+* may make more sense to store in a database if so, IDK
+### Tasks/Routines
+* these are list of cameras to use for a given task/routine
+* these configs could completely replace the routines, 
 ## Database
+database for users should contain:
+* the name of the user
+* perhaps a designation(primary user, friend,employee, shoplifter, etc)
+* a (relative or absolute) path to the facial embeddings associated with that name
 ## Models
+* this directory contains the models necessary for all the tasks
+* should probably either be completely added to git ignore, or the embedded directories should be ignored and the only file in here is a download script, though that may make more sense to put somewhere else(wherever new tasks are added)
 ### Face_detection
+* model(s) for face detection
 ## FaceData
 ### UserPhotos
-### Facial Embeddings
+* these are directorys containing approximately 20 photos collected for each person who needs to be recognized
+* each directory in here is named after the user
+* not sure if friendly users should be in a separate directory from people who should be recognized but aren't people who the primary user would consider friendly
+* it may make more sense to leave that up to the database, assigning each named person a designation
+### UserEmbeddings
+* these are the facial embeddings that the facial recognition task uses to identify that particular user
