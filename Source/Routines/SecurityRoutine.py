@@ -1,16 +1,17 @@
 import cv2
 import numpy as np
 from tomlkit import parse
-from Tasks.faceRecognitionTask import faceCascadeDetector
+from Tasks.faceTasks import faceCascadeDetector
+import os
 
 
-class SecurityRoutine(Routine, faceTask):
-    def __init__(self,):
-        Routine.__init__(self, gray=True)
+# class SecurityRoutine(Routine, faceTask):
+#    def __init__(self,):
+#        Routine.__init__(self, gray=True)
 
 
-def load_config(toml_file, table):
-    with open(toml_file, "r") as f:
+def load_config(toml_path, table):
+    with open(toml_path, "r") as f:
         data = f.read()
         config = parse(data)
         print(config)
@@ -23,11 +24,9 @@ if __name__ == "__main__":
     feed = cv2.VideoCapture(0)
     frame = feed.read()
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    # TODO replace bit below with actual config file
-    face_data = {
-        "faceCascadePath": "./Tasks/task_data/haarcascade_frontalface_default.xml",
-        "eyeCascadePath": "./Tasks/task_data/haarcascade_eye.xml",
-    }
+    # load necessary configs from argos.toml
+    argos_home = os.getenv("ARGOS_HOME")
+    face_data = load_config(argos_home + "Storage/config/argos.toml", "face_data")
     # TODO have constraints passed as cmdline argument in order to choose
     # between different implementations based on performance and accuracy
     faceDetector = faceCascadeDetector(face_data)
