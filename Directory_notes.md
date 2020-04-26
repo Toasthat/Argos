@@ -9,6 +9,14 @@
 * if time allows for it perhaps a way to view the feeds being acted on
 
 # Source
+## argos_utils
+* this is the kitchen sink of argos
+* contains things for downloading models to specific directories, adding new tasks, etc
+* also will contain code necessary for initilization such as:
+    * set up environment variables
+    * scripts for creating users (such as training a model on their photos)
+    * creating necessary directories and use case specific configuration(cameras)
+* if the only purpose of the gui is for initilization, then this should contain all code it needs to interact with.  
 ## backend_ports
 * these contain two types of backend_ports
     * things that allow the application to output to databases or directories
