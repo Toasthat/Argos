@@ -22,11 +22,15 @@ if __name__ == "__main__":
     # set up tasks
     # TODO add CaptureManager or similar class to handle multiple feeds
     feed = cv2.VideoCapture(0)
+    print("yeet")
     frame = feed.read()
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    print("yak")
+    # gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # load necessary configs from argos.toml
     argos_home = os.getenv("ARGOS_HOME")
-    face_data = load_config(argos_home + "Storage/config/argos.toml", "face_data")
+    print("yikes")
+    face_data = load_config(argos_home + "/Storage/config/argos.toml", "face_data")
     # TODO have constraints passed as cmdline argument in order to choose
     # between different implementations based on performance and accuracy
+    print(face_data)
     faceDetector = faceCascadeDetector(face_data)

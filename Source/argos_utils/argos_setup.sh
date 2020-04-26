@@ -1,10 +1,17 @@
 #!/usr/bin/bash
 ARGOS_HOME="$(git rev-parse --show-toplevel)"
 #set environment variable for bash and fish if available
-echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)">>~/.profile
+if [[ -z "${ARGOS_HOME}" ]]; then
+    
+    echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)">>~/.profile
 
-if [ -x "$(command -v fish)" ]; then
-    fish -c "set -Ux ARGOS_HOME $(git rev-parse --show-toplevel)"
+    if [ -x "$(command -v zsh)" ]; then
+       echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)">>~/.zprofile
+    fi
+
+    if [ -x "$(command -v fish)" ]; then
+        fish -c "set -Ux ARGOS_HOME $(git rev-parse --show-toplevel)"
+    fi
 fi
 
 #the facial recognition task is necessary for the base security routine
