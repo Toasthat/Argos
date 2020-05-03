@@ -37,7 +37,7 @@ class CTclass:
             #fails during initialization
             print('ERROR IN CTclassINIT:', str(exc))
         
-    def Upload(self, title, img):
+    def imgUpload(self, title, img):
         photo = self.drive.CreateFile({'title':title})
         photo.SetContentFile(self.name)
         photo.Upload()
