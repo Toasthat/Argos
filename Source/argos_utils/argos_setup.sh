@@ -23,3 +23,15 @@ wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubuserconte
 alface_default.xml
 
 wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye.xml
+
+wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/download_
+weights.py
+
+wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/deploy.prototxt
+
+
+wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/weights.meta4
+
+wget -P "$ARGOS_HOME/Storage/models/face_recognition/" https://storage.cmusatyalab.org/openface-models/nn4.small2.v1.t7
+
+cd "$ARGOS_HOME/Storage/models/face_detection/" && python download_weights.py && rm weights.meta4 download_weights.py

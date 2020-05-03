@@ -3,9 +3,9 @@ import numpy as np
 
 
 class faceCascadeDetector(object):
-    def __init__(self, face_data):
-        self.face_cascade = cv2.CascadeClassifier(face_data["faceCascadePath"])
-        self.eye_cascade = cv2.CascadeClassifier(face_data["eyeCascadePath"])
+    def __init__(self, faceCascadePath, eyeCascadePath):
+        self.face_cascade = cv2.CascadeClassifier(faceCascadePath)
+        self.eye_cascade = cv2.CascadeClassifier(eyeCascadePath)
 
     def getFaces(self, gray_frame):
         return self.face_cascade.detectMultiScale(

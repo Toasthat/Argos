@@ -11,16 +11,22 @@ def load_config(toml_file, table):
     with open(toml_file, "r") as f:
         data = f.read()
         config = parse(data)
-        print(config)
+        # print(config)
     return config[table]
 
 
 if __name__ == "__main__":
-    config = load_config("config.toml", "embeddingsExtractor")
-    detector = cv2.dnn.readNetFromCaffe(config["detector_path"], config["weights_path"])
-    embedder = cv2.dnn.readNetFromTorch(config["embedding_model"])
-    ImagePaths = list(paths.list_images(config["training_directory"]))
-    output_dir = config["face_embeddings_directory"]
+    argos_home = os.getenv("ARGOS_HOME")
+    config = load_config(
+        argos_home + "/Storage/config/argos.toml", "embeddingsExtractor"
+    )
+    detector = cv2.dnn.readNetFromCaffe(
+        argos_home + config["dnn_detector_path"],
+        argos_home + config["dnn_weights_path"],
+    )
+    embedder = cv2.dnn.readNetFromTorch(argos_home + config["face_embedding_model"])
+    ImagePaths = list(paths.list_images(argos_home + config["training_directory"]))
+    output_dir = argos_home + config["face_embeddings_directory"]
     known_embeddings = []
     known_names = []
     total = 0
@@ -85,5 +91,5 @@ if __name__ == "__main__":
     # dump the facial embeddings
     print("".format(total))
     data = {"embeddings": known_embeddings, "names": known_names}
-    with open(output_dir + "embeddings.pickle", "wb") as f:
+    with open(argos + output_dir + "embeddings.pickle", "wb") as f:
         f.write(pickle.dumps(data))

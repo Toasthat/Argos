@@ -35,6 +35,9 @@ if __name__ == "__main__":
     # TODO have constraints passed as cmdline argument in order to choose
     # between different implementations based on performance and accuracy
     print(face_data)
-    faceDetector = faceCascadeDetector(face_data)
+    faceDetector = faceCascadeDetector(
+        argos_home + face_data["faceCascadePath"],
+        argos_home + face_data["eyeCascadePath"],
+    )
 
     # next main loop
