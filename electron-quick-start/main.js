@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
+//module.exports = path;
 
 function createWindow () {
   // Create the browser window.
@@ -8,12 +9,14 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
+      nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')
+
     }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('gui.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -37,5 +40,22 @@ app.on('activate', function () {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
+
+// function detect_faces() {
+//   document.getElementById("detect").value = "Hang on..."
+//   //const python = require('python-shell')
+//   //var paths = require('path')
+
+//     var options = {
+//       scriptPath : path.join(__dirname, '/../engine/'),
+//       pythonPath : '/usr/bin/python3'
+//     }
+
+//   var face = new python("faces.py", options);
+
+//   face.end(function(err, code, message) {
+//     document.getElementById("detect").value = "Detect faces";
+//   })
+// }
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
