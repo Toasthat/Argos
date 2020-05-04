@@ -89,7 +89,9 @@ if __name__ == "__main__":
                 total += 1
 
     # dump the facial embeddings
-    print("".format(total))
+    print("{}".format(total))
     data = {"embeddings": known_embeddings, "names": known_names}
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     with open(argos_home + output_dir + "embeddings.pickle", "wb") as f:
         f.write(pickle.dumps(data))
