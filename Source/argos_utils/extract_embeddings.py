@@ -93,5 +93,5 @@ if __name__ == "__main__":
     data = {"embeddings": known_embeddings, "names": known_names}
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    with open(argos_home + output_dir + "embeddings.pickle", "wb") as f:
+    with open(output_dir + "embeddings.pickle", "wb") as f:
         f.write(pickle.dumps(data))
