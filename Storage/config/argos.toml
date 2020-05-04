@@ -2,7 +2,7 @@
 training_directory="/Storage/data/user_photos/"
 face_embeddings_directory="/Storage/data/user_embeddings/"
 dnn_detector_path="/Storage/models/face_detection/deploy.prototxt"
-dnn_weights_path="/Storage/models/Face_detection_model/res10_300x300_ssd_iter_140000_fp16.caffemodel"
+dnn_weights_path="/Storage/models/face_detection/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 face_embedding_model="/Storage/models/face_recognition/nn4.small2.v1.t7"
 minimum_confidence= ".5"
 

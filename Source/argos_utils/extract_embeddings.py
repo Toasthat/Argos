@@ -91,5 +91,5 @@ if __name__ == "__main__":
     # dump the facial embeddings
     print("".format(total))
     data = {"embeddings": known_embeddings, "names": known_names}
-    with open(argos + output_dir + "embeddings.pickle", "wb") as f:
+    with open(argos_home + output_dir + "embeddings.pickle", "wb") as f:
         f.write(pickle.dumps(data))
