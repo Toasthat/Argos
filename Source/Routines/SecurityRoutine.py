@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 from tomlkit import parse
-from Tasks.faceTasks import faceCascadeDetector
+from Tasks.face_tasks import FaceCascadeDetector, svmFace
 import os
-
+import time
 
 # class SecurityRoutine(Routine, faceTask):
 #    def __init__(self,):
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     # initilize the feed
     # TODO add CaptureManager or similar class to handle multiple feeds
     feed = cv2.VideoCapture(0)
-    print("yeet")
+    time.sleep(3)
     frame = feed.read()
     print("yak")
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -38,6 +38,11 @@ if __name__ == "__main__":
     faceDetector = faceCascadeDetector(
         argos_home + face_data["faceCascadePath"],
         argos_home + face_data["eyeCascadePath"],
+    )
+    faceRecognizer = faceRecognizer(
+        argos_home + face_data["face_embedding_model"],
+        argos_home + face_data["svm_recognizer_path"],
+        argos_home + face_data["svm_labels_path"],
     )
 
     # next main loop

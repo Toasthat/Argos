@@ -2,11 +2,15 @@
 the acts of noticing faces"""
 
 import cv2
-#import numpy as np
+from pickle import loads
+
+# import numpy as np
+
 
 class FaceCascadeDetector(object):
-    """This class makes an object that does
-    the facial detection for the program"""
+    """This class makes an object that uses haar cascade
+    based facial detection"""
+
     def __init__(self, faceCascadePath, eyeCascadePath):
         self.face_cascade = cv2.CascadeClassifier(faceCascadePath)
         self.eye_cascade = cv2.CascadeClassifier(eyeCascadePath)
@@ -19,5 +23,20 @@ class FaceCascadeDetector(object):
         )
 
 
+class svmFace(object):
+    """This class makes an object that uses svm based
+    facial recognition"""
+
+    def __init__(self, embedder_path, svm_recognizer_path, svm_labels_path):
+        self.embedder = cv2.dnn.readNetFromTorch(embedder_path)
+        self.recognizer = loads(open(svm_recognizer_path))
+        self.label_encoder = loads(open(svm_labels_path))
+
+    def check_if_user(frame):
+        pass
+
+
 class EigenFace(object):
     """ use EigenFace based algorithm to recognize faces """
+
+    pass

@@ -19,10 +19,12 @@ if __name__ == "__main__":
     recognizer = SVC(C=1.0, kernel="linear", probability=True)
     recognizer.fit(data["embeddings"], labels)
 
-    open(config["face_embeddings_directory"] + "recognizer.pickle", "wb").write(
-        pickle.dumps(recognizer)
-    ).close()
+    with open(
+        ARGOS_HOME + config["face_embeddings_directory"] + "recognizer.pickle", "wb"
+    ) as f:
+        f.write(pickle.dumps(recognizer))
 
-    open(config["face_embeddings_directory"] + "label_encoder.pickle", "wb").write(
-        pickle.dumps(label_encoder)
-    ).close()
+    with open(
+        ARGOS_HOME + config["face_embeddings_directory"] + "label_encoder.pickle", "wb"
+    ) as f:
+        f.write(pickle.dumps(label_encoder))
