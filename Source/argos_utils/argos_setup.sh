@@ -54,3 +54,11 @@ fi
 if [[ ! -f "$ARGOS_HOME/Source/daemon/include/toml.hpp" ]]; then
     wget -P "$ARGOS_HOME/Source/daemon/include/" https://raw.githubusercontent.com/marzer/tomlplusplus/master/toml.hpp
 fi
+
+#NOTE: fix and provide dialog to decide whether to install global or local if not already available
+if ! [ -f "$ARGOS_HOME/Frontends/node_modules/electron" ]; then
+    cd "$ARGOS_HOME/Frontends"
+    npm install electron
+    npm install python-shell
+    npm install path
+fi
