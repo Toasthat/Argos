@@ -74,24 +74,19 @@ class svmFace(object):
     facial recognition"""
 
     def __init__(
-        self,
-        embedderPath,
-        svmRecognizerPath,
-        svmLabelsPath,
-        blobScaleFactor=1.0 / 255,
-        blobSize=(96, 96),
+        self, embedderPath, svmRecognizerPath, svmLabelsPath,
     ):
 
         self.embedder = cv2.dnn.readNetFromTorch(embedderPath)
         self.recognizer = loads(open(svmRecognizerPath, "rb").read())
         self.label_encoder = loads(open(svmLabelsPath, "rb").read())
-        self.blobScaleFactor = blobScaleFactor
-        self.blobSize = blobSize
+        self.blobScaleFactor = 1.0 / 255
+        self.blobSize = (96, 96)
 
     def identify(self, frame, facialRoI):
-        print(facialRoI)
         (startX, startY, endX, endY) = facialRoI
         face = frame[startY:endY, startX:endX]
+        """
         faceBlob = (
             cv2.dnn.blobFromImage(
                 face,
@@ -102,8 +97,18 @@ class svmFace(object):
                 crop=False,
             ),
         )
-
-        self.embedder.setInput(faceBlob)
+        """
+        # print(faceBlob)
+        self.embedder.setInput(
+            cv2.dnn.blobFromImage(
+                face,
+                self.blobScaleFactor,
+                self.blobSize,
+                (0, 0, 0),
+                swapRB=True,
+                crop=False,
+            )
+        )
         vector = self.embedder.forward()
 
         predictions = self.recognizer.predict_proba(vector)[0]
