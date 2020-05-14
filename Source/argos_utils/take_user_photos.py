@@ -2,12 +2,16 @@ import cv2
 import os
 import numpy as np
 import time
+import sys
 from argos_common import ARGOS_CONFIG, ARGOS_HOME, load_config
 
 if __name__ == "__main__":
     feed = cv2.VideoCapture(0)
     config = load_config(ARGOS_CONFIG, "embeddingsExtractor")
-    label = input("please enter your first name:")
+    if sys.argv > 1:
+        label = sys.argv[1]
+    else:
+        label = input("Please enter your name: ")
     detector = cv2.dnn.readNetFromCaffe(
         ARGOS_HOME + config["dnn_detector_path"],
         ARGOS_HOME + config["dnn_weights_path"],

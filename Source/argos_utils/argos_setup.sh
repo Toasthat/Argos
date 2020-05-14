@@ -61,4 +61,5 @@ if ! [ -f "$ARGOS_HOME/Frontends/node_modules/electron" ]; then
     npm install electron
     npm install python-shell
     npm install path
+    npm install process
 fi

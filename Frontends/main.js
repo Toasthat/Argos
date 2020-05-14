@@ -1,4 +1,5 @@
 // Modules to control application life and create native browser window
+const env = require('process-env')
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
@@ -22,6 +23,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+env.get('ARGOS_HOME');
 app.whenReady().then(createWindow)
 
 // Quit when all windows are closed.
