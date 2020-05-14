@@ -1,0 +1,15 @@
+# $HOME/.config/systemd/user/launch_writing_task.service
+
+[Unit]
+Description=launch the argos daemon
+Wants=launch_writing_task.timer
+
+[Service]
+Environment=ARGOS_HOME={ARGOS_HOME}
+Type=forking
+WorkingDirectory={ARGOS_HOME}
+ExecStart={ARGOS_HOME}/Source/Sentinel/sentinel.py
+
+
+[Install]
+WantedBy=default.target

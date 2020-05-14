@@ -1,6 +1,7 @@
 import cv2
 import os
 import numpy as np
+import time
 from argos_common import ARGOS_CONFIG, ARGOS_HOME, load_config
 
 if __name__ == "__main__":
@@ -12,13 +13,26 @@ if __name__ == "__main__":
         ARGOS_HOME + config["dnn_weights_path"],
     )
     photo_count = 0
+    number_of_photos = len(
+        [
+            name
+            for name in os.listdir(
+                ARGOS_HOME + config["training_directory"] + "stranger_danger/"
+            )
+            if os.path.isfile(
+                os.path.join(
+                    ARGOS_HOME + config["training_directory"] + "stranger_danger/", name
+                )
+            )
+        ]
+    )
     ret, frame = feed.read()
     cv2.namedWindow("capture user photos")
     cv2.waitKey(10)
     labelPath = ARGOS_HOME + config["training_directory"] + label
     if not os.path.exists(labelPath):
         os.mkdir(labelPath)
-    while photo_count < 24:
+    while photo_count < number_of_photos:
         ret, frame = feed.read()
         detector.setInput(
             cv2.dnn.blobFromImage(
@@ -36,6 +50,7 @@ if __name__ == "__main__":
         if detections[0, 0, bestGuess, 2] > 0.7:
             cv2.imwrite(labelPath + "/photo{}.jpg".format(photo_count), frame)
             photo_count += 1
+            time.sleep(0.5)
         cv2.imshow("capture user photos", frame)
         cv2.waitKey(10)
     print("success?")

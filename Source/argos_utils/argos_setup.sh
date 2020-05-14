@@ -15,7 +15,7 @@ if [[ -z "${ARGOS_HOME}" ]]; then
 fi
 # create the necessary directories if they don't exists
 mkdir -p "$ARGOS_HOME/Storage/models/face_detection/"
-
+mkdir -p "$ARGOS_HOME/Storage/models/face_recognition/"
 #download the necessary photos for training the facial recognition model
 if [[ ! -d "$ARGOS_HOME/Storage/data/user_photos/stranger_danger" ]]; then
     mkdir -p "$ARGOS_HOME/Storage/data/user_photos/"
@@ -29,7 +29,10 @@ if [[ ! -f "$ARGOS_HOME/Storage/models/face_detection/haarcascade_frontalface_de
     wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
 
     wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye.xml
+fi
 
+# download and setup dnn based face detection models
+if [[ ! -f "$ARGOS_HOME/Storage/models/deploy.prototxt" ]]; then
     wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/download_weights.py
 
     wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/deploy.prototxt
@@ -41,7 +44,13 @@ if [[ ! -f "$ARGOS_HOME/Storage/models/face_detection/haarcascade_frontalface_de
     #sed 
     cd "$ARGOS_HOME/Source/argos_utils/"
 fi
+
+# download model necessary for facial recognition
 if [[ ! -f "$ARGOS_HOME/Storage/models/face_recognition/nn4.small2.v1.t7" ]]; then
     wget -P "$ARGOS_HOME/Storage/models/face_recognition/" https://storage.cmusatyalab.org/openface-models/nn4.small2.v1.t7
 fi
 
+# download toml++ header only version
+if [[ ! -f "$ARGOS_HOME/Source/daemon/include/toml.hpp" ]]; then
+    wget -P "$ARGOS_HOME/Source/daemon/include/" https://raw.githubusercontent.com/marzer/tomlplusplus/master/toml.hpp
+fi
