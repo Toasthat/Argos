@@ -34,4 +34,8 @@ if __name__ == "__main__":
         # if this photo probably contains a face
         if detections[0, 0, bestGuess, 2] > 0.7:
             cv2.imwrite("photo{}.jpg".format(photo_count), labelPath)
-            proto_count += 1
+            photo_count += 1
+        cv2.imshow("capture user photos", frame)
+        cv2.waitKey(10)
+    print("success?")
+    cv2.destroyAllWindows()
