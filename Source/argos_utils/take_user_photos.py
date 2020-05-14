@@ -34,7 +34,7 @@ if __name__ == "__main__":
         bestGuess = np.argmax(detections[0, 0, :, 2])
         # if this photo probably contains a face
         if detections[0, 0, bestGuess, 2] > 0.7:
-            cv2.imwrite(labelPath + "photo{}.jpg".format(photo_count), frame)
+            cv2.imwrite(labelPath + "/photo{}.jpg".format(photo_count), frame)
             photo_count += 1
         cv2.imshow("capture user photos", frame)
         cv2.waitKey(10)
