@@ -16,7 +16,8 @@ if __name__ == "__main__":
     cv2.namedWindow("capture user photos")
     cv2.waitKey(10)
     labelPath = ARGOS_HOME + config["training_directory"] + label
-    os.mkdir(labelPath)
+    if not os.path.exists(labelPath):
+        os.mkdir(labelPath)
     while photo_count < 24:
         ret, frame = feed.read()
         detector.setInput(
@@ -33,7 +34,7 @@ if __name__ == "__main__":
         bestGuess = np.argmax(detections[0, 0, :, 2])
         # if this photo probably contains a face
         if detections[0, 0, bestGuess, 2] > 0.7:
-            cv2.imwrite("photo{}.jpg".format(photo_count), labelPath)
+            cv2.imwrite(labelPath + "photo{}.jpg".format(photo_count), frame)
             photo_count += 1
         cv2.imshow("capture user photos", frame)
         cv2.waitKey(10)
