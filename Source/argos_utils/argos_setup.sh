@@ -19,7 +19,9 @@ mkdir -p "$ARGOS_HOME/Storage/models/face_recognition/"
 #download the necessary photos for training the facial recognition model
 if [[ ! -d "$ARGOS_HOME/Storage/data/user_photos/stranger_danger" ]]; then
     mkdir -p "$ARGOS_HOME/Storage/data/user_photos/"
-    wget -P "$ARGOS_HOME/Storage/data/user_photos/" https://smttt-my.sharepoint.com/:f:/g/personal/w10016423_usm_edu/ElRUsihZyr1LlWTbACnT44ABdi2YYl0ExaNFq0Deaz6X1A?e=Ngq9So
+    wget https://www.dropbox.com/sh/873towdnuuya39k/AAAwqnFd6Gx-2ucr26kuYfnEa?dl=0
+    unzip "AAAwqnFd6Gx-2ucr26kuYfnEa?dl=0" -d "$ARGOS_HOME/Storage/data/user_photos/stranger_danger"
+    rm "AAAwqnFd6Gx-2ucr26kuYfnEa?dl=0"
 fi
 #the facial recognition task is necessary for the base security routine
 #it makes sense to download these models by default
@@ -32,7 +34,7 @@ if [[ ! -f "$ARGOS_HOME/Storage/models/face_detection/haarcascade_frontalface_de
 fi
 
 # download and setup dnn based face detection models
-if [[ ! -f "$ARGOS_HOME/Storage/models/deploy.prototxt" ]]; then
+if [[ ! -f "$ARGOS_HOME/Storage/models/face_detection/deploy.prototxt" ]]; then
     wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/download_weights.py
 
     wget -P "$ARGOS_HOME/Storage/models/face_detection/" https://raw.githubusercontent.com/opencv/opencv/master/samples/dnn/face_detector/deploy.prototxt
@@ -56,10 +58,10 @@ if [[ ! -f "$ARGOS_HOME/Source/daemon/include/toml.hpp" ]]; then
 fi
 
 #NOTE: fix and provide dialog to decide whether to install global or local if not already available
-if ! [ -f "$ARGOS_HOME/Frontends/node_modules/electron" ]; then
-    cd "$ARGOS_HOME/Frontends"
-    npm install electron
-    npm install python-shell
-    npm install path
-    npm install process
-fi
+#if ! [ -f "$ARGOS_HOME/Frontends/node_modules/electron" ]; then
+#    cd "$ARGOS_HOME/Frontends"
+#    npm install electron
+#    npm install python-shell
+#    npm install path
+#    npm install process
+#fi
