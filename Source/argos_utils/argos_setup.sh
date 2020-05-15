@@ -1,9 +1,13 @@
 #!/usr/bin/bash
 ARGOS_HOME="$(git rev-parse --show-toplevel)"
 #set environment variable for bash and fish if available
-if [[ -z "${ARGOS_HOME}" ]]; then
-    
-    echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)">>~/.profile
+if [ -z "$ARGOS_HOME" ]; then
+
+    if [ -f "$HOME/.profile" ]; then
+        echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)" >> ~/.profile
+    else
+        echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)" >> ~/.bash_profile
+    fi
 
     if [ -x "$(command -v zsh)" ]; then
        echo "export ARGOS_HOME=$(git rev-parse --show-toplevel)">>~/.zprofile
