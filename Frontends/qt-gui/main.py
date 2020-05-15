@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
+import subprocess
 from argos_common import ARGOS_HOME, ARGOS_CONFIG, load_config
 
 
@@ -53,7 +54,15 @@ class main(QMainWindow):
     @pyqtSlot()
     def on_click(self):
         textboxValue = self.textbox.text()
+
         # QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + textboxValue, QMessageBox.Ok, QMessageBox.Ok)
+        subprocess.run(
+            [
+                "/usr/bin/python",
+                ARGOS_HOME + "/Source/argos_utils/take_user_photos.py",
+                textboxValue,
+            ]
+        )
         self.textbox.setText("")
 
 
