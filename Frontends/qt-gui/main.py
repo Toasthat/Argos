@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
+from argos_common import ARGOS_HOME, ARGOS_CONFIG, load_config
 
 
 class main(QMainWindow):
