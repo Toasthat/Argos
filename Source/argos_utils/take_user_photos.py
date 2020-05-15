@@ -8,7 +8,7 @@ from argos_common import ARGOS_CONFIG, ARGOS_HOME, load_config
 if __name__ == "__main__":
     feed = cv2.VideoCapture(0)
     config = load_config(ARGOS_CONFIG, "embeddingsExtractor")
-    if sys.argv > 1:
+    if len(sys.argv) > 1:
         label = sys.argv[1]
     else:
         label = input("Please enter your name: ")
